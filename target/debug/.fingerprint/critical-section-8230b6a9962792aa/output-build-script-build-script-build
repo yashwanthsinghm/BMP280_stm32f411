@@ -1,0 +1,11 @@
+info: syncing channel updates for 'nightly-2021-08-18-x86_64-apple-darwin'
+info: latest update on 2021-08-18, rust version 1.56.0-nightly (30a0a9b69 2021-08-17)
+info: component 'rust-src' is up to date
+info: component 'rust-std' for target 'riscv32imac-unknown-none-elf' is up to date
+info: component 'rust-std' for target 'riscv32imc-unknown-none-elf' is up to date
+info: component 'rust-std' for target 'thumbv6m-none-eabi' is up to date
+info: component 'rust-std' for target 'thumbv7em-none-eabi' is up to date
+info: component 'rustfmt' for target 'x86_64-apple-darwin' is up to date
+warning: Force-skipping unavailable component 'rust-std-avr-specs/avr-atmpeg328p.json'
+error: unknown `--json` option `future-incompat`
+
