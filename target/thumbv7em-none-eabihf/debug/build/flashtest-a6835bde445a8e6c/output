@@ -1,0 +1,3 @@
+cargo:rustc-link-search=/home/yky2kor/Embedded/git_bmp280/BMP280_stm32f411/target/thumbv7em-none-eabihf/debug/build/flashtest-a6835bde445a8e6c/out
+cargo:rerun-if-changed=build.rs
+cargo:rerun-if-changed=memory.x
