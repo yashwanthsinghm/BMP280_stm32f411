@@ -16,53 +16,10 @@ use stm32f4xx_hal::{
     serial::config::Config,
 };
 
-const VALID_ADDR_RANGE: Range<u8> = 0x08..0x78;
-use crc::{Crc, Algorithm, CRC_16_IBM_SDLC, CRC_32_ISCSI};
 
-pub const X25: Crc<u16> = Crc::<u16>::new(&CRC_16_IBM_SDLC);
-pub const CASTAGNOLI: Crc<u32> = Crc::<u32>::new(&CRC_32_ISCSI);
-const CUSTOM_ALG: Algorithm<u16> = Algorithm {
-    width: 16,
-    poly: 0x1021,
-    init: 0xffff,//0xf078
-    refin: true,
-    refout: true,
-    xorout: 0xffff,
-    check: 0xaee7,
-    residue: 0x0000
-};
 #[entry]
 fn main() -> ! {
-let header = [0x00];
-let data = [0x01,0x02,0x03,0x04];
-    // use custom algorithm
-let crc = Crc::<u16>::new(&CUSTOM_ALG);
-let mut digest = crc.digest();
-//digest.update(b"123456789");
-digest.update(&header);
 
-digest.update(&data);
-let result = digest.finalize();
-defmt::println!("{:02x}", result);
-//no mac = d658  58d6 a729
-//cmac 0x80  = b875  75b8  8a47
-//rmac 0x40  = 614e        b19e
-let mut echo_frame = [0x00, 0x04, 0x05, 0x06,0x84,0x31];
-
-let mut host_key_slot_query = [0x14,0x17,0x00,0x00];
-let mut hostkey_response = [0;4];
-let mut put_attribute = [0x17,0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x99,0xAA,0xBB,0xCC,0xDD,0xEE,0xFF,0x11,0x11,0x11,0x22,0x22,0x33,0x33,0x44,0x44,0x55,0x55,0x66,0x66,0x77,0x77,0x88,0x88];
-let mut put_attribute_response = [0;4];
-//let mut envelopekeyslot = [0x14,0x17,0x66,0x77]; 
-//let mut envelopekeyslot = [0x14,0x17,0x77,0x66];// working
-let mut envelopekeyslot = [0x14,0x17,0x99,0x88];
-//let mut envelopekeyslot = [0x14,0x17,0x88,0x99];
-let mut enveloperesponse = [0;7];
-let mut envelopekey = [0x11,0x07,0x00,0x00,0xaf,0xb1];
-let mut envelopekey_response = [0x00;3];
-let mut rx_data: [u8;6] = [0;6];
-
-//assert_eq!(val, 0xaee7);
     defmt::println!("Start");
     let dp = pac::Peripherals::take().unwrap();
     let mut addr1 =0;
