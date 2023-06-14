@@ -1,6 +1,0 @@
-cargo:rustc-link-lib=static=cortex-m
-cargo:rustc-link-search=/Users/yashwanthsingh/Yash/Projects/STSAFE-A100_securechip/scanning_stmf411/stm32f411/target/thumbv7em-none-eabihf/debug/build/cortex-m-5848d7638453f5ca/out
-cargo:rustc-cfg=cortex_m
-cargo:rustc-cfg=armv7m
-cargo:rustc-cfg=armv7em
-cargo:rustc-cfg=has_fpu

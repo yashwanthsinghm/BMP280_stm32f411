@@ -1,3 +1,0 @@
-cargo:rustc-link-search=/Users/yashwanthsingh/Yash/Projects/stm32_projects/BMP280/BMP280_stm32f411/target/debug/build/stm32f4-358d2b7a1c521a2c/out
-cargo:rerun-if-changed=src/stm32f411/device.x
-cargo:rerun-if-changed=build.rs

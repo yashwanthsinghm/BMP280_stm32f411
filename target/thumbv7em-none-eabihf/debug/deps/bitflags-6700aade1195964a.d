@@ -1,7 +1,0 @@
-/home/yky2kor/Embedded/git_bmp280/BMP280_stm32f411/target/thumbv7em-none-eabihf/debug/deps/bitflags-6700aade1195964a.rmeta: /home/yky2kor/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bitflags-1.3.2/src/lib.rs
-
-/home/yky2kor/Embedded/git_bmp280/BMP280_stm32f411/target/thumbv7em-none-eabihf/debug/deps/libbitflags-6700aade1195964a.rlib: /home/yky2kor/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bitflags-1.3.2/src/lib.rs
-
-/home/yky2kor/Embedded/git_bmp280/BMP280_stm32f411/target/thumbv7em-none-eabihf/debug/deps/bitflags-6700aade1195964a.d: /home/yky2kor/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bitflags-1.3.2/src/lib.rs
-
-/home/yky2kor/.cargo/registry/src/index.crates.io-6f17d22bba15001f/bitflags-1.3.2/src/lib.rs:
