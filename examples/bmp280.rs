@@ -5,15 +5,10 @@
 #[cfg(feature = "defmt")]
 use defmt_rtt as _;
 extern crate bmp280_ehal;
-//use bmp280_ehal as bmp;
-//extern crate panic_halt;
-use panic_probe as _; 
-use bmp280_driver;
-//use bmp280;
-//use panic_halt as _;
 use core::{convert::TryInto, ops::Range};
 use cortex_m::asm::{self, delay};
 use cortex_m_rt::entry;
+use panic_probe as _;
 use stm32f4xx_hal::{
     i2c::Mode,
     pac::{self},
@@ -21,13 +16,10 @@ use stm32f4xx_hal::{
     serial::config::Config,
 };
 
-
 #[entry]
 fn main() -> ! {
-
-
     let dp = pac::Peripherals::take().unwrap();
-    let mut addr1 =0;
+    let mut addr1 = 0;
     // I2C Config steps:
     // 1) Need to configure the system clocks
     // - Promote RCC structure to HAL to be able to configure clocks
@@ -47,40 +39,29 @@ fn main() -> ! {
     let mut i2c = dp.I2C1.i2c(
         (scl, sda),
         Mode::Standard {
-            frequency: 400.kHz(),
+            frequency: 100.kHz(),
         },
         &clocks,
     );
 
     defmt::println!("before bmp init..");
-// to create sensor with default configuration:
-let mut bmp = bmp280_ehal::BMP280::new(i2c).unwrap();
-defmt::println!("after bmp init");
-
-
-// to get pressure:
-let pres = bmp.pressure();
-defmt::println!("pres....");
-defmt::println!("{:?}", pres);
-   // bmp280_driver::
-    //let mut bmp = bmp280_ehal::BMP280::new(i2c);
-   // let mut ps = bmp280::BMP280::new(i2c).unwrap();
-    // to get pressure:
-    //let pres = bmp.pressure();
-    //defmt::println!("{:?}", pres);
- 
-
-
-
+    // to create sensor with default configuration:
+    let mut bmp = bmp280_ehal::BMP280::new(i2c).unwrap();
+    defmt::println!("after bmp init");
 
     loop {
-       
+        let mut data: [u8; 24] = [0; 24];
+        // to get pressure:
+        let temp = bmp.temp();
+        let pres = bmp.pressure();
+        //let _ = i2c.write_read(0x76, &[0xFA as u8],&mut data);
+        defmt::println!("TEMP....");
+        defmt::println!("{:?}", temp);
+        //delay(41000);
+        let mut data: [u8; 24] = [0; 24];
+        //let _ = i2c.write_read(0x76, &[0xF7 as u8],&mut data);
+
+        defmt::println!("PRES....");
+        defmt::println!("{:?}", pres);
     }
 }
-
-// #[panic_handler] // panicking behavior
-// fn panic(_: &core::panic::PanicInfo) -> ! {
-//     loop {
-//         cortex_m::asm::bkpt();
-//     }
-// }
